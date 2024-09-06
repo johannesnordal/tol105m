@@ -1,0 +1,61 @@
+{
+    "Cyclone": {
+        "Basilisk": {
+        },
+        "Horovod": {
+            "passed": true
+        }
+    },
+    "DEEP": {
+        "DeepSpeed": {
+            "passed": true
+        },
+        "HeAT": {
+            "passed": true
+        },
+        "Horovod": {
+            "passed": true
+        },
+        "Pytorch-DDP": {
+            "passed": true
+        }
+    },
+    "JUWELS": {
+        "DeepSpeed": {
+            "passed": true
+        },
+        "HeAT": {
+            "passed": false
+        },
+        "Horovod": {
+            "passed": true
+        },
+        "Pytorch-DDP": {
+            "passed": true
+        }
+    },
+    "JURECA": {
+        "DeepSpeed": {
+            "passed": true
+        },
+        "HeAT": {
+            "passed": true
+        },
+        "Horovod": {
+            "passed": true
+        },
+        "Pytorch-DDP": {
+            "passed": true
+        }
+    },
+    "LUMI": {
+        "Pytorch-DDP": {
+            "passed": true
+        }
+    },
+    "VEGA": {
+        "Basilisk": {
+            "passed": true
+        }
+    }
+}

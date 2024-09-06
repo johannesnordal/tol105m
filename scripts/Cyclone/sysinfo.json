@@ -1,0 +1,25 @@
+{
+    "partition": {
+        "milan": {
+            "nodes": 34
+        },
+        "skylake": {
+            "nodes": 3
+        },
+        "nehalem": {
+            "nodes": 3
+        },
+        "cpu": {
+            "nodes": 13
+        },
+        "p100": {
+            "nodes": 8
+        },
+        "a100": {
+            "nodes": 6
+        },
+        "gpu": {
+            "nodes": 16
+        }
+    }
+}

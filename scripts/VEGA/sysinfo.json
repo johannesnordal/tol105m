@@ -1,0 +1,19 @@
+{
+    "partition": {
+        "dev": {
+            "nodes": 8
+        },
+        "cpu": {
+            "nodes": 960
+        },
+        "longcpu": {
+            "nodes": 6
+        },
+        "gpu": {
+            "nodes": 60
+        },
+        "largemem": {
+            "nodes": 192
+        }
+    }
+}

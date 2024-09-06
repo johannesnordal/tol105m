@@ -1,0 +1,32 @@
+#SBATCH --partition=dp-dam
+#SBATCH -A deepext
+#SBATCH --nodes=8
+#SBATCH -t 20:00:00
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=8
+#SBATCH --gpus-per-node=2
+
+#SBATCH --job-name=mvit
+#SBATCH --output=logs/%x_%j.out
+#SBATCH --error=logs/%x_%j.err
+
+task="batch4_sp"
+data_fn="train_batch4.hdf5"
+
+ip a 
+nvidia-smi
+
+export MASTER_ADDR=$(scontrol show hostname ${SLURM_NODELIST} | head -n 1)
+export MASTER_PORT=29500
+export WORLD_SIZE=1 #$((SLURM_NNODES * SLURM_GPUS_PER_NODE))
+export TORCH_HOME=/raise/python/nn/$task/weights
+
+echo 'copying data locally ...'
+srun cp $DATA/$data_fn /nvme/scratch/$data_fn
+echo 'local copy done'
+ls /nvme/scratch/
+
+srun singularity exec --nv \
+                  --pwd /raise/python/nn/$task \
+                  --bind /scratch:/user,$PROJECT/raise:/raise,/nvme/scratch/$data_fn:/data/dataset.hdf5,$PROJECT/raise/clearml_cache:/clearml_cache \
+                  $PROJECT/raise_nn.sif python -u train.py ./configs/MViT.yaml

@@ -1,0 +1,10 @@
+{
+    "partition": {
+        "dp-esb": {
+            "nodes": 75
+        },
+        "dp-dam": {
+            "nodes": 16
+        }
+    }
+}

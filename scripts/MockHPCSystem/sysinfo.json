@@ -1,0 +1,7 @@
+{
+    "partition": {
+        "base": {
+            "nodes": 10
+        }
+    }
+}

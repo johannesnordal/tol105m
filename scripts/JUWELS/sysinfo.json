@@ -1,0 +1,25 @@
+{
+    "partition": {
+        "batch": {
+            "nodes": 1024
+        },
+        "mem192": {
+            "nodes": 64
+        },
+        "devel": {
+            "nodes": 8
+        },
+        "gpus": {
+            "nodes": 46
+        },
+        "develgpus": {
+            "nodes": 2
+        },
+        "booster": {
+            "nodes": 384
+        },
+        "develbooster": {
+            "nodes": 4
+        }
+    }
+}
