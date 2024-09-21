@@ -101,7 +101,7 @@ class Duck {
 	    vec2(x + a, y),
 	    vec2(x + a, y - a),
 	];
-	this.speed = Math.random() * (0.02 - 0.015) + 0.015;
+	this.speed = Math.random() * (0.008 - 0.006) + 0.008;
 	if (this.direction > 0) {
 	    this.speed = -this.speed;
 	}
@@ -143,20 +143,25 @@ var mouseState = {
 
 window.onload = function init() {
 
-    canvas = document.getElementById( "gl-canvas" );
+    canvas = document.getElementById("gl-canvas");
     
-    gl = WebGLUtils.setupWebGL( canvas );
-    if ( !gl ) { alert( "WebGL isn't available" ); }
+    gl = WebGLUtils.setupWebGL(canvas);
+    if (!gl) {
+	alert("WebGL isn't available");
+    }
     
-    gl.viewport( 0, 0, canvas.width, canvas.height );
-    gl.clearColor( 0.8, 0.8, 0.8, 1.0 );
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.clearColor(0.8, 0.8, 0.8, 1.0);
 
-    var program = initShaders( gl, "vertex-shader", "fragment-shader" );
-    gl.useProgram( program );
+    var program = initShaders(gl, "vertex-shader", "fragment-shader");
+    gl.useProgram(program);
 
     gun  = new Gun(gl);
-    ducks = [new Duck(gl, 1), new Duck(gl, -1)];
-    bullets = [new Bullet(gl), new Bullet(gl), new Bullet(gl)];
+    ducks = [];
+    for (let i = 0; i < 4; i++) {
+	ducks.push(new Duck(gl, i % 2 ? -1 : 1));
+    }
+    bullets = [new Bullet(gl), new Buffer(gl)];
     
     canvas.addEventListener("mousedown", (event) => {
         mouseState.movement = true;
@@ -193,7 +198,7 @@ window.onload = function init() {
     render();
 }
 
-function to_regtangle(elem) {
+function to_rectangle(elem) {
     const r = {
 	x1: elem.v[0][0], y1: elem.v[0][1],
 	x2: elem.v[2][0], y2: elem.v[2][1],
@@ -210,8 +215,8 @@ function rectangles_collide(p1, p2) {
     if (p1.v === undefined || p2.v == undefined) {
 	return false;
     }
-    r1 = to_regtangle(p1);
-    r2 = to_regtangle(p2);
+    r1 = to_rectangle(p1);
+    r2 = to_rectangle(p2);
     return !(r1.x + r1.w < r2.x ||
 	     r1.x > r2.x + r2.w ||
 	     r1.y + r1.h < r2.y ||
@@ -229,9 +234,6 @@ function render() {
 	    if (!duck.is_active()) {
 		duck.activate();
 	    }
-	});
-
-	ducks.forEach((duck) => {
 	    duck.render(gl);
 	});
 
